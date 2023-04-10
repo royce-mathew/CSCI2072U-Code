@@ -7,9 +7,9 @@
    - [Secant Method](#secant-method)
    
 This repository contains final versions of codes we've written during class, as well as other relevant codes.
-## Lecture 2
+## Lecture [2](https://learn.ontariotechu.ca/courses/21707/files/2796036?module_item_id=499488)
 ### [Bisection](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/bisection_code.py)
-[Pseudocode - Page 33](https://learn.ontariotechu.ca/courses/21707/files/2796036?module_item_id=499488)
+#### Pseudocode - Page 33
 #### Remarks
 - Upper bound for eror: $x^{(k)} −x^∗| ≤ \epsilon^{(k)} = |b^{(k)} −a^{(k)}|$
 - Error on kth iteration: $\epsilon^{(k)} = \frac{\epsilon^{(0)}}{2^k}$
@@ -27,9 +27,8 @@ if f is continuous and f (a)f (b) < 0. If there are two or more solutions, we do
 3. **How fast does it converge?**
 - The error $|x^* − x(k)|$ decreases by a factor of $\frac{1}{2}$ in each iteration.
 
-## Lecture 3 / 4
+## Lecture [3](https://learn.ontariotechu.ca/courses/21707/files/2809429?module_item_id=501240) / [4](https://learn.ontariotechu.ca/courses/21707/files/2817747?module_item_id=502691)
 ### Notes / topics covered
-- In general, to solve and find isolated solutions we need the same number of equations as unknowns. 
 - Intermediate Value Theorum
 - Lecture 4 shows the comparisons between Bisection and Newton / Secant methods
 ### [Newton Raphson Theorum](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/NetwonRaphson_plot.py)
@@ -62,3 +61,26 @@ Secant methods needs two initial guesses: $x_{(0)}$ and $x_{(1)}$
 - The secant method is a `second order recurrence relation`. It relates the next approximation to the two previous approximations
 - If we can find an $a$ and $b$ such that $x^∗ \in [a, b]$, then $x_0 = a$ and $x_1 = b$ is a good starting point.
 - Error Estimate: $\epsilon^{(k+1)} \approx (\epsilon^{(k)})^2$
+
+
+## Lecture 5
+### Notes
+- In general, to solve and find isolated solutions we need the same number of equations as unknowns. 
+- Zero Matrices: Matrices that have all values set to 0
+- Identity Matrices: Matrices that have the diagonal from $(1, 1)$ to $(n, n)$ as 1s and other values as 0s; 
+- Coordinate Vectors: All 0s except one 1. 
+- $k^{th}$ Coordinate Vectors: $k^{th}$ Column of $I$
+- Matrix Properties - Page 18
+- Nonsingular Matrix Properties - Page 19
+- Never solve linear systems by computing $A^{−1}$ and $x = A^{−1}b$!
+- `scipy.linalg.solve` - Solution of $Ax = b$
+   - Gaussian Elimination - Page 32
+      - **Pivot element** on diagonal used to zero out entries
+      - Multiplier for eliminating $A_{k, l}$ with pivot element $A_{k,k}$ is
+      - Gaussian elimination is `equivalent` to finding L & U such that
+   - LU Decomposition
+      - Pseudocode - Page 70
+   - Pivoting
+
+### []
+#### 
