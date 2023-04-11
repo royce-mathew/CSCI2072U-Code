@@ -223,3 +223,33 @@ A simple re-ordering can reduce the complexity drastically!
    - **Newton Polynomial Basis**: cost of building matrix; takes fewer but is still $O(n^2)$, cost of solving triangular system is $O(n^2)$; since it only requires forward substitution.
 - Condition Number: The condition number of triangular matrix resulting from Newton Polynomial Basis is mich smaller than Vandermonde matrix, meaning Newton Polynomial Basis leads to more accurate results.
 - Taylor's Theorem - Slide 15/21
+
+
+## Lecture 18
+### Notes
+- The piecewise linear interpolant is **not differentiable**.
+- Cubic Splines - Slide 9
+
+
+### Lecture 19
+### Notes
+- Interpolation is useful for approximating smooth functions (hard to evaluate functions)
+- Existence of the interpolant is guaranteed.
+- There is an explicit upper bound for the interpolation error.
+- Forcing the interpolant to go through noisy data gives strange results.
+- The least squares solution is a low-order polynomial that could try to find a way to interpolate the noisy data.
+   - The set of equations for this approximant will be over-determined; generically, the approximant cannot satisfy all conditions.
+   - We can only find an *approximate* solution to these equations
+- An overdetermined system of linear equations can be written as A**x** = **b** where A is "tall and thin", b is the RHS vector, and there are more equations than       unknowns.
+- When solving A**y** = **b**, the residual of **y** is **r(y) = b**-A**y** where residual can be defined as the amount by which y fails to satisfy the system A**x** = **b**.
+- **norms** are used to quantify the **size** of vectors.
+- To solve an overdetermined system - Slide 9
+   - Generically, no solution exists for overdetermined systems.
+   - Goal: find vector $**x**^{\*} \in \mathbb{R}^{M}$ that ***minimizes size of residual $r(x^{\*}.***
+   - To minimise $r(x^{\*})$, measure size with some norm... - Slide 9
+   - $x^{\*}$ is a minimiser of ||r(x)|| in that norm... - Slide 9
+- Least-squares approximation & normal equations
+   - `scipy.linalg.lstsq(A,b)` computes least-squares approximations of overdetermined systems (only works tall/thin systems). This also computes the mean-square             residual (res), the rank of A (rnk) and the singular values of A (s)
+      - ```A = numpy.array([[1.0,-2.0],[1.0,-1.0],[1.0,1.0]])
+           b = numpy.array([0.5,1.0,-1.0])
+           xstar, res, rnk, s = scipy.linalg.lstsqr(A,b)```
