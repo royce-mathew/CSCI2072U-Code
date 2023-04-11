@@ -126,4 +126,5 @@ Pseudocode - Page 18
 - Polynomial interpolants - Slide 8/9
 - Polynomial Interpolation Theorem (Existence/Uniqueness of Polynomial Interpolation): If all the interpolation nodes are distinct the interpolant exists. If we select the polynomial interpolant of the lowest possible order, it is unique.
 - Vandermonde System, in matrix form, is defined as V**a** = **y** where - Slide 12
-- 
+- Vandermonde System, in matrix form, is defined as V**a** = **y** where - Slide 12
+- Polynomial coefficients are a = V^{-1}**y** for an invertible Vandermonder matrix
