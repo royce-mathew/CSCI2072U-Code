@@ -121,3 +121,27 @@ y = scipy.linalg.solve_triangular(L,Pb,lower=True)
 x = scipy.linalg.solve_triangular(U,y,lower=False)
 ```
 
+## Lecture 11
+### Notes
+- Used to find the solution for non-linear systems of equations
+- Algorithm for Implementing NewtonSystem - Slide 6
+- NewtonSystem uses Jacobian, which is defined - Slide 7
+
+
+## Lecture 13
+### Remarks
+- f~ us called an interpolating function or interpolant
+- x_k are interpolatng points or nodes or abscissa
+- f~ provides value for points in between the nodes x_k
+- Desirable to have smooth f~, differentiable, easy to compute
+
+### Notes
+- There are a few types of interpolating functions:
+   - Linear
+   - Polynomial
+   - Trignometric
+   - Rational
+- Polynomial interpolants - Slide 8/9
+- Polynomial Interpolation Theorem (Existence/Uniqueness of Polynomial Interpolation): If all the interpolation nodes are distinct the interpolant exists. If we select the polynomial interpolant of the lowest possible order, it is unique.
+- Vandermonde System, in matrix form, is defined as V**a** = **y** where - Slide 12
+- 
