@@ -90,7 +90,7 @@ Secant methods needs two initial guesses: $x_{(0)}$ and $x_{(1)}$
    - Not every invertible matrix A has LU decomposition A = LU
 
 ## Lecture [6](https://learn.ontariotechu.ca/courses/21707/files/2837955?module_item_id=504697)
-### [LUP Decomposition](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/bisection_code.py)
+### [LUP Decomposition](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/LUP_linalg_implement.py)
 Pseudocode - Page 18
 - L: Lower Triangle Matrix
 - U: Upper Triangle Matrix
@@ -103,37 +103,19 @@ Pseudocode - Page 18
 - Partial pivoting: multipliers $L_{k, l}$ satisfy $|L_{k, l}| ≤ 1$.
 - $PA = LU$ decomposition is the default way to solve linear systems.
 
-```python3
-import numpy as np
-import scipy.linalg
-
-A = np.array([
-[0.2,1.4,-0.4,12.3],
-[-2.3,4.2,1.1,-0.9],
-[9.2,-2.3,-0.1,2.2],
-[3.4,3.3,-10.1,4.0]
-])
-b = np.array([[0.2],[-1.2],[3.3],[0.2]])
-Pt,L,U = scipy.linalg.lu(A)
-Pb = np.matmul(Pt.T,b)
-
-y = scipy.linalg.solve_triangular(L,Pb,lower=True)
-x = scipy.linalg.solve_triangular(U,y,lower=False)
-```
-
-## Lecture 11
+## Lecture [11](https://learn.ontariotechu.ca/courses/21707/files/2897480?module_item_id=509266)
 ### Notes
 - Used to find the solution for non-linear systems of equations
 - Algorithm for Implementing NewtonSystem - Slide 6
 - NewtonSystem uses Jacobian, which is defined - Slide 7
 
 
-## Lecture 13
+## Lecture [13](https://learn.ontariotechu.ca/courses/21707/files/2931521?module_item_id=511258)
 ### Remarks
-- f~ us called an interpolating function or interpolant
-- x_k are interpolatng points or nodes or abscissa
-- f~ provides value for points in between the nodes x_k
-- Desirable to have smooth f~, differentiable, easy to compute
+- $\tilde{f}$ us called an interpolating function or interpolant
+- $x_k$ are interpolatng points or nodes or abscissa
+- $\tilde{f}$ provides value for points in between the nodes $x_k$
+- Desirable to have smooth $\tilde{f}, differentiable, easy to compute
 
 ### Notes
 - There are a few types of interpolating functions:
