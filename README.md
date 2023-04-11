@@ -10,9 +10,17 @@
    - LU Decomposition
 4. **[Lecture 6 / 7](#lecture-6--7)**
    - [LUP Decomposition](#lup-decomposition)
-
-5. **[Lecture 11](#lecture-11)**
-6. **[Lecture 12](#lecture-13)**
+5. **[Lecture 7](#lecture-7)**
+   - Vector Norms
+6. **[Lecture 8](#lecture-8)**
+   - Computational Complexity
+   - Flops
+5. **[Lecture 9](#lecture-9)**
+   - Big O
+   - Flop Calculation
+6. **[Lecture 11](#lecture-11)**
+7. **[Lecture 13](#lecture-13)**
+8. **[Lecture 16](#lecture-16)**
 
    
 This repository contains final versions of codes we've written during class, as well as other relevant codes.
@@ -88,8 +96,10 @@ Secant methods needs two initial guesses: $x_{(0)}$ and $x_{(1)}$
       - **Pivot element** on diagonal used to zero out entries
       - Multiplier for eliminating $A_{k, l}$ with pivot element $A_{k,k}$ is
       - Gaussian elimination is `equivalent` to finding L & U such that
+      - Flops: $\frac{2}{3}n^3 + \frac{1}{2}n^2 - \frac{7}{6}n$
    - LU Decomposition
       - Pseudocode - Page 70
+      - Flops: $\frac{2}{3}n^3 + \frac{1}{2}n^2 - \frac{7}{6}n$
    - Not every invertible matrix A has LU decomposition A = LU
 
 ## Lecture [6](https://learn.ontariotechu.ca/courses/21707/files/2837955?module_item_id=504697) / [7](https://learn.ontariotechu.ca/courses/21707/files/2890877?module_item_id=508963)
@@ -123,30 +133,62 @@ Pseudocode - Page 18
 - Partial pivoting: multipliers $L_{k, l}$ satisfy $|L_{k, l}| ≤ 1$.
 - $PA = LU$ decomposition is the default way to solve linear systems.
 
-#### Condition Number
+#### [Condition Number](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/Assignment3_Solutions/CondNumFuncA3.py)
 - The **condition number** of a matrix is defined as the quotient of its largest to its smallest singular values. (Page 39)
 - The condition number $K(A)$ is an indicator of whether a system of linear equations $Ax = b$ is “good” or “bad”
-- If $K(A)$ is small, it’s “good”: we call it well-conditioned
-- If $K(A)$ is large, it’s “bad”: we call it ill-conditioned
+- If $K(A)$ is small ($<= 1$), it’s “good”: we call it well-conditioned
+- If $K(A)$ is large ($>1$), it’s “bad”: we call it ill-conditioned
 
 #### [Vandermonte Matrix](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/Accuracy_LinSys.py)
-
+- Full Definition (Page 45)
 
 ## Lecture [7](https://learn.ontariotechu.ca/courses/21707/files/2890877?module_item_id=508963)
 ### Notes
-- Vector norms;
+- Vector norms - quantify lengths of / distances between vectors;
    - Euclidean norm or 2-norm
       - `scipy.linalg.norm(x,2)`
    - Manhattan norm or 1-norm 
       - `scipy.linalg.norm(x,scipy.inf)`
    - max/infinity/Chebyschev norm
-  
+- Error and Residual (Page 29)
+
+
+## Lecture [8](https://learn.ontariotechu.ca/courses/21707/files/2890876?module_item_id=508962)
+### Computational Complexity
+Computational Complexity is the amount of work required to execute/carry out algorithm from start to finish.
+#### Counting Flops
+1. Write pseudocode of algorithm clearly.
+2. In each line, count number of flops ( $+$ , $−$ , $×$ , $÷$ ).
+3. Count number of times each line executes (e.g., in a for loop).
+4. Multiply cost of each line by number of times it executes
+#### Remarks
+- Assume all floating-point operations have equal cost
+- Ignore memory access or overwriting in computing cost
+- Precise definitions of flops vary in distinct texts/papers
+- Count special function evaluations (e.g., sqrt, etc.) as needed
+- Count special function evaluations (e.g., sqrt, etc.) as needed
+
+## Lecture [9](https://learn.ontariotechu.ca/courses/21707/files/2890875?module_item_id=508961)
+Computational Complexity of LU Decomposition and Gaussian Elimination.
+### Big O Notation
+### Computing Solution of $Ux = c$ by back substitution
+- Flops: $n^2$
+### Horner Algorithm
+- Flops: $2n$
+- Page 61
+
+The total cost of solving a linear system with Gaussian elimination is $$\frac{2}{3}n^2 + \frac{3}{2}n - \frac{7}{6}n$$
+With LU Decomposition: $$\frac{2}{3}n^3 + \frac{5}{2}n^2 - \frac{7}{6}n$$
+The cost of evaluating a polynomial of order $n$ is $2n$ – when done in the right way.
+A simple re-ordering can reduce the complexity drastically!
 
 ## Lecture [11](https://learn.ontariotechu.ca/courses/21707/files/2897480?module_item_id=509266)
 ### Notes
 - Used to find the solution for non-linear systems of equations
 - Algorithm for Implementing NewtonSystem - Slide 6
-- NewtonSystem uses Jacobian, which is defined - Slide 7
+- Branching statements ($if$ or $case$) can require extra care
+- Complexity analysis possible for memory/storage, etc.
+- Complexity analysis of recursively defined functions yields recurrence relations to solve
 
 
 ## Lecture [13](https://learn.ontariotechu.ca/courses/21707/files/2931521?module_item_id=511258)
@@ -167,17 +209,17 @@ Pseudocode - Page 18
 - Vandermonde System, in matrix form, is defined as $Va = y$ where - Slide 12
 - Polynomial coefficients are $a = V^{-1}y$ for an invertible Vandermonder matrix
 
-## Lecture 16
+## Lecture [16](https://learn.ontariotechu.ca/courses/21707/files/2991356?module_item_id=514972)
 ### Notes
-- The error of polynomial interpolation is |E_n(x)| = |f(x) - `Π`_n(x)_| where `Π` is the unique polynomial interpolation of degree at most n.
+- The error of polynomial interpolation is $|E_n(x)| = |f(x) - Π_n(x)|$ where `Π` is the unique polynomial interpolation of degree at most n.
 - The upper bound (maximum error) of polynomial interpolation error - Slide 5 to 8
 - Conclusions we can draw from the error formula:
    - Functions with small higher derivates are well-approximated by interpolating polynomials (such functions are smooth).
    - We can choose the location of the interpolating nodes to minimize the error. Equidistant nodes are bad but nodes near the boundaries are good.
    - Extrapolation is far more dangerous than interpolation. Upper bound for the error of extrapolation grows without bound.
-- With a ***Newton Polynomial Basis***, the resulting system of linear equations for the coefficients is M**a**=**y** where M is now triangular and depends on the       interpolation points of x_k - Slide 12/13
+- With a ***Newton Polynomial Basis***, the resulting system of linear equations for the coefficients is $Ma=y$ where $M$ is now triangular and depends on the interpolation points of $x_k$ - Slide 12/13
 - Computational Complexity:
-   - **Monomial Basis**: cost of building matrix is O(n^2), cost of solving the system is O(n^2)
-   - **Newton Polynomial Basis**: cost of building matrix; takes fewer but is still O(n^2), cost of solving triangular system is O(n^2); since it only requires forward        substitution.
-- Condition Number: The condition number of triangular matrix resulting from Newton Polynomial Basis is mich smaller than Vandermonde matrix, meaning Newton Polynomial   Basis leads to more accuarte results.
+   - **Monomial Basis**: cost of building matrix is $O(n^2)$, cost of solving the system is $O(n^2)$
+   - **Newton Polynomial Basis**: cost of building matrix; takes fewer but is still $O(n^2)$, cost of solving triangular system is $O(n^2)$; since it only requires forward substitution.
+- Condition Number: The condition number of triangular matrix resulting from Newton Polynomial Basis is mich smaller than Vandermonde matrix, meaning Newton Polynomial Basis leads to more accurate results.
 - Taylor's Theorem - Slide 15/21
