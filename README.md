@@ -245,7 +245,7 @@ A simple re-ordering can reduce the complexity drastically!
 - **norms** are used to quantify the **size** of vectors.
 - To solve an overdetermined system - Slide 9
    - Generically, no solution exists for overdetermined systems.
-   - Goal: find vector $**x**^{\*} \in \mathbb{R}^{M}$ that ***minimizes size of residual $r(x^{\*}.***
+   - Goal: find vector $**x**^{\*} \in \mathbb{R}^{M}$ that ***minimizes size of residual $r(x^{\*}$.***
    - To minimise $r(x^{\*})$, measure size with some norm... - Slide 9
    - $x^{\*}$ is a minimiser of ||r(x)|| in that norm... - Slide 9
 - Least-squares approximation & normal equations
