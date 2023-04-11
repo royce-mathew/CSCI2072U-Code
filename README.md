@@ -11,6 +11,9 @@
 4. **[Lecture 6](#lecture-6)**
    - [LUP Decomposition](#lup-decomposition)
 
+5. **[Lecture 11](#lecture-11)**
+6. **[Lecture 12](#lecture-13)**
+
    
 This repository contains final versions of codes we've written during class, as well as other relevant codes.
 ## Lecture [2](https://learn.ontariotechu.ca/courses/21707/files/2796036?module_item_id=499488)
@@ -115,7 +118,7 @@ Pseudocode - Page 18
 - $\tilde{f}$ us called an interpolating function or interpolant
 - $x_k$ are interpolatng points or nodes or abscissa
 - $\tilde{f}$ provides value for points in between the nodes $x_k$
-- Desirable to have smooth $\tilde{f}, differentiable, easy to compute
+- Desirable to have smooth $\tilde{f}$, differentiable, easy to compute
 
 ### Notes
 - There are a few types of interpolating functions:
@@ -125,6 +128,5 @@ Pseudocode - Page 18
    - Rational
 - Polynomial interpolants - Slide 8/9
 - Polynomial Interpolation Theorem (Existence/Uniqueness of Polynomial Interpolation): If all the interpolation nodes are distinct the interpolant exists. If we select the polynomial interpolant of the lowest possible order, it is unique.
-- Vandermonde System, in matrix form, is defined as V**a** = **y** where - Slide 12
-- Vandermonde System, in matrix form, is defined as V**a** = **y** where - Slide 12
-- Polynomial coefficients are a = V^{-1}**y** for an invertible Vandermonder matrix
+- Vandermonde System, in matrix form, is defined as $Va = y$ where - Slide 12
+- Polynomial coefficients are $a = V^{-1}y$ for an invertible Vandermonder matrix
