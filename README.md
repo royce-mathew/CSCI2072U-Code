@@ -309,20 +309,15 @@ ${x_k}^n_{k=0}$ are *quadrature nodes / points*
 ${w_k}^n_{k=0}$ are *quadrature weights*
 Weights depends on ${x_k}^n_{k=0}$ with $b-a$ of interval
 ### Midpoint Formula of $I_{imp}$
-$$
-I_{imp} := (b-a)f(\frac{a+b}{2})
-$$
+
+$$I_{imp} := (b-a)f(\frac{a+b}{2})$$
 Sample midpoint at $x = (\frac{a+b}{2})$ of interval $[a, b]$
 Example of using the midpoint formula to approximate - Slide 21
 ### Trapezoidal Formula
-$$
-I_{t} := (\frac{b-a}{2})[f(a) + f(b)]
-$$
+$$I_{t} := (\frac{b-a}{2})[f(a) + f(b)]$$
 Example of using the trapezoidal formula to approximate - Slide 32
-### [Simpson Formula]
-$$
-I_{s} := (\frac{b-a}{6})[f(a) + 4f(\frac{a+b}{2}) + f(b)]
-$$
+### Simpson Formula
+$$I_{s} := (\frac{b-a}{6})[f(a) + 4f(\frac{a+b}{2}) + f(b)]$$
 Example of using the Simpson formula to approximate - Slide 44
 
 ### Composite Formulas
