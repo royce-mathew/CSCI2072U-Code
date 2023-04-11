@@ -1,4 +1,6 @@
 # 2072U - Course Code
+All the slide numbers listed here are in Canvas format. They are **not** according to the page numbers written on the bottom right of the slides.
+<img src="https://user-images.githubusercontent.com/114615781/231276287-7c1e9c20-e203-4e98-9423-3de84ccfaef4.png" alt="Slide pg" height="300">
 # Table of Contents
 - **[Lecture 2](#lecture-2)**
    - [Bisection](#bisection)
@@ -28,7 +30,10 @@
    - [Polynomial Interpolation](#polynomial-interpolation)
    - [Taylor Polynomials](#taylor-polynomial)
 - **[Lecture 18](#lecture-18)**
+   - Cubic Splines
 - **[Lecture 19](#lecture-19)**
+   - Least Squares Approximation
+- **[Lecture 20](#lecture-20)** 
 
    
 # Lectures
@@ -237,7 +242,7 @@ Some conclusions we can draw from the error formula:
    - We can choose the location of the interpolating nodes to minimize the error. Equidistant nodes are bad but nodes near the boundaries are good.
    - Extrapolation is far more dangerous than interpolation. Upper bound for the error of extrapolation grows without bound.
 
-With a ***Newton Polynomial Basis***, the resulting system of linear equations for the coefficients is $Ma=y$ where $M$ is now triangular and depends on the interpolation points of $x_k$ - Slide 12/13
+With a ***Newton Polynomial Basis***, the resulting system of linear equations for the coefficients is $Ma=y$ where $M$ is now triangular and depends on the interpolation points of $x_k$ - Slide 18
 
 #### Computational Complexity
 - **Monomial Basis**: cost of building matrix is $O(n^2)$, cost of solving the system is $O(n^2)$
@@ -249,17 +254,17 @@ The condition number of triangular matrix resulting from Newton Polynomial Basis
 ### Taylor Polynomial
 Slide 28
 #### Notes
-- The Taylor polynomial exists is f is sufficiently smooth.
+- The Taylor polynomial exists is $f$ is sufficiently smooth.
 - We have an expression for the remainder.
 - The computation of Taylor polynomials requires the computation of derivatives. **Not many functions have such simple derivatives as in our examples!**
-- Properties of f at x = c completely determine Tn(x), so all information comes from x = c. The Taylor polynomial is useful as a local approximation only
+- Properties of $f$ at $x = c$ completely determine $Tn(x)$, so all information comes from $x = c$. The Taylor polynomial is useful as a local approximation only
 - For $|x − c|$ large, many terms needed for convergence. In contrast, polynomial interpolation is useful on a whole domain.
 
 
 ## Lecture [18](https://learn.ontariotechu.ca/courses/21707/files/2997531?module_item_id=515442)
 ### Notes
 - The piecewise linear interpolant is **not differentiable**.
-- Cubic Splines - Slide 9
+- Cubic Splines - Slide 10
 
 
 ## Lecture [19](https://learn.ontariotechu.ca/courses/21707/files/3016575?module_item_id=516491)
@@ -286,3 +291,44 @@ Slide 28
          b = numpy.array([0.5,1.0,-1.0])
          xstar, res, rnk, s = scipy.linalg.lstsqr(A,b)
         ```
+        
+## Lecture [20](https://learn.ontariotechu.ca/courses/21707/files/3016576?module_item_id=516492)
+Difference Approximation
+### Higher Order Differences
+`diff` computes differences of successive elements in a vector and operates on arrays of numerical data.
+```py
+numpy.diff(y,2) 
+# equivalent to
+numpy.diff(numpy.diff(y))
+```
+
+## Lecture [21](https://learn.ontariotechu.ca/courses/21707/files/3029622?module_item_id=517001)
+### [Quadrature](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/QuadClassEx.py)
+**Quadrature:** numerical approximation of definite integrals
+${x_k}^n_{k=0}$ are *quadrature nodes / points*
+${w_k}^n_{k=0}$ are *quadrature weights*
+Weights depends on ${x_k}^n_{k=0}$ with $b-a$ of interval
+### Midpoint Formula of $I_{imp}$
+$$
+I_{imp} := (b-a)f(\frac{a+b}{2})
+$$
+Sample midpoint at $x = (\frac{a+b}{2})$ of interval $[a, b]$
+Example of using the midpoint formula to approximate - Slide 21
+### Trapezoidal Formula
+$$
+I_{t} := (\frac{b-a}{2})[f(a) + f(b)]
+$$
+Example of using the trapezoidal formula to approximate - Slide 32
+### [Simpson Formula]
+$$
+I_{s} := (\frac{b-a}{6})[f(a) + 4f(\frac{a+b}{2}) + f(b)]
+$$
+Example of using the Simpson formula to approximate - Slide 44
+
+### Composite Formulas
+Slide 49+
+There are composite Variations of these formulas are that the composite divides the interval of integration into smaller sub-intervals and uses the midpoint of each sub-interval to approximate the area under the curve. This allows for a more accurate approximation of the integral, especially when the function being integrated is highly curved or oscillatory. The composite midpoint rule is also more computationally efficient when the interval of integration is large, as it requires fewer function evaluations than the midpoint rule to achieve the same level of accuracy.
+
+### Errors
+![image](https://user-images.githubusercontent.com/114615781/231278698-6b84850c-5ce9-4ef2-ba05-f5d46b1a96b6.png)
+![image](https://user-images.githubusercontent.com/114615781/231278732-378feaa4-3c16-48b4-a0a4-def058eb27e4.png)
