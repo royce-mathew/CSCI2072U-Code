@@ -1,6 +1,8 @@
 # 2072U - Course Code
 All the slide numbers listed here are in Canvas format. They are **not** according to the page numbers written on the bottom right of the slides.
 <img src="https://user-images.githubusercontent.com/114615781/231276287-7c1e9c20-e203-4e98-9423-3de84ccfaef4.png" alt="Slide pg" height="300">
+
+## [All Lectures Combined](./AllSlides.pdf)
 # Table of Contents
 - **[Lecture 2](#lecture-2)**
    - [Bisection](#bisection)
