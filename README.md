@@ -5,6 +5,12 @@
 2. **[Lecture 3/4](#lecture-3--4)**
    - [Newton Raphson Theorum](#newton-raphson-theorum)
    - [Secant Method](#secant-method)
+
+3. **[Lecture 5](#lecture-5)**
+   - LU Decomposition
+4. **[Lecture 6](#lecture-6)**
+   - [LUP Decomposition](#lup-decomposition)
+
    
 This repository contains final versions of codes we've written during class, as well as other relevant codes.
 ## Lecture [2](https://learn.ontariotechu.ca/courses/21707/files/2796036?module_item_id=499488)
@@ -32,7 +38,7 @@ if f is continuous and f (a)f (b) < 0. If there are two or more solutions, we do
 - Intermediate Value Theorum
 - Lecture 4 shows the comparisons between Bisection and Newton / Secant methods
 ### [Newton Raphson Theorum](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/NetwonRaphson_plot.py)
-[Pseudocode - Page 22](https://learn.ontariotechu.ca/courses/21707/files/2809429?module_item_id=501240)
+Pseudocode - Page 22
 
 #### Remarks
 - The newton raphson methods needs the derivative to function correctly. When you don't have derivative or can't calculate, look at secant or bisection.
@@ -63,7 +69,7 @@ Secant methods needs two initial guesses: $x_{(0)}$ and $x_{(1)}$
 - Error Estimate: $\epsilon^{(k+1)} \approx (\epsilon^{(k)})^2$
 
 
-## Lecture 5
+## Lecture [5](https://learn.ontariotechu.ca/courses/21707/files/2839238?module_item_id=504808)
 ### Notes
 - In general, to solve and find isolated solutions we need the same number of equations as unknowns. 
 - Zero Matrices: Matrices that have all values set to 0
@@ -75,12 +81,43 @@ Secant methods needs two initial guesses: $x_{(0)}$ and $x_{(1)}$
 - Never solve linear systems by computing $A^{−1}$ and $x = A^{−1}b$!
 - `scipy.linalg.solve` - Solution of $Ax = b$
    - Gaussian Elimination - Page 32
+      - Converting square matrix to triangular form
       - **Pivot element** on diagonal used to zero out entries
       - Multiplier for eliminating $A_{k, l}$ with pivot element $A_{k,k}$ is
       - Gaussian elimination is `equivalent` to finding L & U such that
    - LU Decomposition
       - Pseudocode - Page 70
-   - Pivoting
+   - Not every invertible matrix A has LU decomposition A = LU
 
-### []
-#### 
+## Lecture [6](https://learn.ontariotechu.ca/courses/21707/files/2837955?module_item_id=504697)
+### [LUP Decomposition](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/bisection_code.py)
+Pseudocode - Page 18
+- L: Lower Triangle Matrix
+- U: Upper Triangle Matrix
+- P: Permutation matrix; A permutation matrix is any matrix obtained from interchanging the rows or columns of the identity matrix.
+### Notes
+- It is not always possible to find $A = LU$ for A nonsingular
+- When A nonsingular, *always* possible to find permutation $P$ such that $PA = LU$, i.e., so that $PA$ has an $LU$ decomposition, also called a Gauss factorisation.
+- **Pivoting:** Using permutations of the rows and/or columns of a matrix to change a pivot element
+- **Partial pivoting**: interchanging rows (not columns) to use small multipliers.
+- Partial pivoting: multipliers $L_{k, l}$ satisfy $|L_{k, l}| ≤ 1$.
+- $PA = LU$ decomposition is the default way to solve linear systems.
+
+```python3
+import numpy as np
+import scipy.linalg
+
+A = np.array([
+[0.2,1.4,-0.4,12.3],
+[-2.3,4.2,1.1,-0.9],
+[9.2,-2.3,-0.1,2.2],
+[3.4,3.3,-10.1,4.0]
+])
+b = np.array([[0.2],[-1.2],[3.3],[0.2]])
+Pt,L,U = scipy.linalg.lu(A)
+Pb = np.matmul(Pt.T,b)
+
+y = scipy.linalg.solve_triangular(L,Pb,lower=True)
+x = scipy.linalg.solve_triangular(U,y,lower=False)
+```
+
