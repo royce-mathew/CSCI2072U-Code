@@ -1,29 +1,34 @@
-# 2072U-Course-Codes
+# 2072U - Course Code
 # Table of Contents
-1. **[Lecture 2](#lecture-2)**
+- **[Lecture 2](#lecture-2)**
    - [Bisection](#bisection)
-2. **[Lecture 3/4](#lecture-3--4)**
+- **[Lecture 3/4](#lecture-3--4)**
    - [Newton Raphson Theorum](#newton-raphson-theorum)
    - [Secant Method](#secant-method)
 
-3. **[Lecture 5](#lecture-5)**
+- **[Lecture 5](#lecture-5)**
    - LU Decomposition
-4. **[Lecture 6 / 7](#lecture-6--7)**
+- **[Lecture 6 / 7](#lecture-6--7)**
    - [LUP Decomposition](#lup-decomposition)
-5. **[Lecture 7](#lecture-7)**
+- **[Lecture 7](#lecture-7)**
    - Vector Norms
-6. **[Lecture 8](#lecture-8)**
+- **[Lecture 8](#lecture-8)**
    - Computational Complexity
    - Flops
-5. **[Lecture 9](#lecture-9)**
+- **[Lecture 9](#lecture-9)**
    - Big O
    - Flop Calculation
-6. **[Lecture 11](#lecture-11)**
-7. **[Lecture 13](#lecture-13)**
-8. **[Lecture 16](#lecture-16)**
+- **[Lecture 11](#lecture-11)**
+   - Newton System
+   - Complexity Analysis
+- **[Lecture 13](#lecture-13)**
+- **[Lecture 16](#lecture-16)**
+   - Polynomial Interpolation
+- **[Lecture 18](#lecture-18)**
+- **[Lecture 19](#lecture-19)**
 
    
-This repository contains final versions of codes we've written during class, as well as other relevant codes.
+# Lectures
 ## Lecture [2](https://learn.ontariotechu.ca/courses/21707/files/2796036?module_item_id=499488)
 ### [Bisection](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/bisection_code.py)
 #### Pseudocode - Page 33
@@ -225,13 +230,13 @@ A simple re-ordering can reduce the complexity drastically!
 - Taylor's Theorem - Slide 15/21
 
 
-## Lecture 18
+## Lecture [18](https://learn.ontariotechu.ca/courses/21707/files/2997531?module_item_id=515442)
 ### Notes
 - The piecewise linear interpolant is **not differentiable**.
 - Cubic Splines - Slide 9
 
 
-### Lecture 19
+## Lecture [19](https://learn.ontariotechu.ca/courses/21707/files/3016575?module_item_id=516491)
 ### Notes
 - Interpolation is useful for approximating smooth functions (hard to evaluate functions)
 - Existence of the interpolant is guaranteed.
@@ -240,16 +245,18 @@ A simple re-ordering can reduce the complexity drastically!
 - The least squares solution is a low-order polynomial that could try to find a way to interpolate the noisy data.
    - The set of equations for this approximant will be over-determined; generically, the approximant cannot satisfy all conditions.
    - We can only find an *approximate* solution to these equations
-- An overdetermined system of linear equations can be written as A**x** = **b** where A is "tall and thin", b is the RHS vector, and there are more equations than       unknowns.
-- When solving A**y** = **b**, the residual of **y** is **r(y) = b**-A**y** where residual can be defined as the amount by which y fails to satisfy the system A**x** = **b**.
+- An overdetermined system of linear equations can be written as $Ax = b$ where $A$ is "tall and thin", $b$ is the RHS vector, and there are more equations than unknowns.
+- When solving $Ay = b$, the residual of $y$ is $r(y) = b -Ay$ where residual can be defined as the amount by which $y$ fails to satisfy the system $Ax = b$.
 - **norms** are used to quantify the **size** of vectors.
 - To solve an overdetermined system - Slide 9
    - Generically, no solution exists for overdetermined systems.
-   - Goal: find vector $**x**^{\*} \in \mathbb{R}^{M}$ that ***minimizes size of residual $r(x^{\*}$.***
+   - Goal: find vector $x^* \in \mathbb{R}^{M}$ that **minimizes size of residual** $r(x^*)$.
    - To minimise $r(x^{\*})$, measure size with some norm... - Slide 9
-   - $x^{\*}$ is a minimiser of ||r(x)|| in that norm... - Slide 9
+   - $x^{\*}$ is a minimiser of $||r(x)||$ in that norm... - Slide 9
 - Least-squares approximation & normal equations
-   - `scipy.linalg.lstsq(A,b)` computes least-squares approximations of overdetermined systems (only works tall/thin systems). This also computes the mean-square             residual (res), the rank of A (rnk) and the singular values of A (s)
-      - ```A = numpy.array([[1.0,-2.0],[1.0,-1.0],[1.0,1.0]])
-           b = numpy.array([0.5,1.0,-1.0])
-           xstar, res, rnk, s = scipy.linalg.lstsqr(A,b)```
+   - `scipy.linalg.lstsq(A,b)` computes least-squares approximations of overdetermined systems (only works tall/thin systems). This also computes the mean-square residual (res), the rank of $A(rnk)$ and the singular values of $A(s)$
+      - ```python
+         A = numpy.array([[1.0,-2.0],[1.0,-1.0],[1.0,1.0]])
+         b = numpy.array([0.5,1.0,-1.0])
+         xstar, res, rnk, s = scipy.linalg.lstsqr(A,b)
+        ```
