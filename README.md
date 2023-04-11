@@ -8,7 +8,7 @@
 
 3. **[Lecture 5](#lecture-5)**
    - LU Decomposition
-4. **[Lecture 6](#lecture-6)**
+4. **[Lecture 6 / 7](#lecture-6--7)**
    - [LUP Decomposition](#lup-decomposition)
 
 5. **[Lecture 11](#lecture-11)**
@@ -92,12 +92,29 @@ Secant methods needs two initial guesses: $x_{(0)}$ and $x_{(1)}$
       - Pseudocode - Page 70
    - Not every invertible matrix A has LU decomposition A = LU
 
-## Lecture [6](https://learn.ontariotechu.ca/courses/21707/files/2837955?module_item_id=504697)
+## Lecture [6](https://learn.ontariotechu.ca/courses/21707/files/2837955?module_item_id=504697) / [7](https://learn.ontariotechu.ca/courses/21707/files/2890877?module_item_id=508963)
 ### [LUP Decomposition](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/LUP_linalg_implement.py)
 Pseudocode - Page 18
 - L: Lower Triangle Matrix
 - U: Upper Triangle Matrix
 - P: Permutation matrix; A permutation matrix is any matrix obtained from interchanging the rows or columns of the identity matrix.
+
+#### Questions
+1. **Under what conditions does the algorithm converge?**
+- The $A = LU$ decomposition works if and only if all leading principal submatrices of $A$ (i.e. $A(1 : k, 1 : k) for k ≤ n)$ are nonsingular. **Not recommended for linear solving!**
+- The PA = LU decomposition works if A is nonsingular. This is the default method for linear solving:
+   - step 1: solve Ly = Pb using forward substitution
+   - step 2: solve Ux = y using backward substitution
+2. **How accurate will the result be?**
+- $‖x − x_{∗}‖$ small means $x_{*} ∈ \mathbb{R}^n$ approximates $x ∈ \mathbb{R}^n$ well.
+- Define *relative error of x∗ as an approximation of x*:
+   -  Relative error of $x_∗$ in norm $‖ · ‖ := ‖x − x_∗‖ ‖x‖$ (assuming $x \neq 0$)
+- Computing (relative) error requires choosing a norm.
+- Norm-wise errors can hide component-wise errors in vectors.
+
+3. **How fast does it converge?**
+- In Newton-Raphson iterations, the error is approximately squared in each iteration (provided it is small enough!). $$\epsilon_0, \epsilon_0^2, \epsilon_0^4, \epsilon_0^8, ...$$
+
 ### Notes
 - It is not always possible to find $A = LU$ for A nonsingular
 - When A nonsingular, *always* possible to find permutation $P$ such that $PA = LU$, i.e., so that $PA$ has an $LU$ decomposition, also called a Gauss factorisation.
@@ -105,6 +122,25 @@ Pseudocode - Page 18
 - **Partial pivoting**: interchanging rows (not columns) to use small multipliers.
 - Partial pivoting: multipliers $L_{k, l}$ satisfy $|L_{k, l}| ≤ 1$.
 - $PA = LU$ decomposition is the default way to solve linear systems.
+
+#### Condition Number
+- The **condition number** of a matrix is defined as the quotient of its largest to its smallest singular values. (Page 39)
+- The condition number $K(A)$ is an indicator of whether a system of linear equations $Ax = b$ is “good” or “bad”
+- If $K(A)$ is small, it’s “good”: we call it well-conditioned
+- If $K(A)$ is large, it’s “bad”: we call it ill-conditioned
+
+#### [Vandermonte Matrix](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/Accuracy_LinSys.py)
+
+
+## Lecture [7](https://learn.ontariotechu.ca/courses/21707/files/2890877?module_item_id=508963)
+### Notes
+- Vector norms;
+   - Euclidean norm or 2-norm
+      - `scipy.linalg.norm(x,2)`
+   - Manhattan norm or 1-norm 
+      - `scipy.linalg.norm(x,scipy.inf)`
+   - max/infinity/Chebyschev norm
+  
 
 ## Lecture [11](https://learn.ontariotechu.ca/courses/21707/files/2897480?module_item_id=509266)
 ### Notes
