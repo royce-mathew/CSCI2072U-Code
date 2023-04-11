@@ -166,3 +166,18 @@ Pseudocode - Page 18
 - Polynomial Interpolation Theorem (Existence/Uniqueness of Polynomial Interpolation): If all the interpolation nodes are distinct the interpolant exists. If we select the polynomial interpolant of the lowest possible order, it is unique.
 - Vandermonde System, in matrix form, is defined as $Va = y$ where - Slide 12
 - Polynomial coefficients are $a = V^{-1}y$ for an invertible Vandermonder matrix
+
+## Lecture 16
+### Notes
+- The error of polynomial interpolation is |E_n(x)| = |f(x) - `Π`_n(x)_| where `Π` is the unique polynomial interpolation of degree at most n.
+- The upper bound (maximum error) of polynomial interpolation error - Slide 5 to 8
+- Conclusions we can draw from the error formula:
+   - Functions with small higher derivates are well-approximated by interpolating polynomials (such functions are smooth).
+   - We can choose the location of the interpolating nodes to minimize the error. Equidistant nodes are bad but nodes near the boundaries are good.
+   - Extrapolation is far more dangerous than interpolation. Upper bound for the error of extrapolation grows without bound.
+- With a ***Newton Polynomial Basis***, the resulting system of linear equations for the coefficients is M**a**=**y** where M is now triangular and depends on the       interpolation points of x_k - Slide 12/13
+- Computational Complexity:
+   - **Monomial Basis**: cost of building matrix is O(n^2), cost of solving the system is O(n^2)
+   - **Newton Polynomial Basis**: cost of building matrix; takes fewer but is still O(n^2), cost of solving triangular system is O(n^2); since it only requires forward        substitution.
+- Condition Number: The condition number of triangular matrix resulting from Newton Polynomial Basis is mich smaller than Vandermonde matrix, meaning Newton Polynomial   Basis leads to more accuarte results.
+- Taylor's Theorem - Slide 15/21
