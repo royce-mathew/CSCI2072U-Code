@@ -1,4 +1,9 @@
 # 2072U - Course Code
+Contributors:
+   @Sid-26
+   @AviShangari
+   @glewis373
+   
 ## [Lecture Slides Combined](./AllSlides.pdf)
 Credit to FlamingNinja925. Download the slides instead of trying to preview in github because it won't let you `Ctrl+F` the slides on here.<br/>
 All the slide numbers listed here are in Canvas format. They are **not** according to the page numbers written on the bottom right of the slides.
