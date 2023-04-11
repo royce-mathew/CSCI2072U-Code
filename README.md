@@ -21,9 +21,12 @@
 - **[Lecture 11](#lecture-11)**
    - Newton System
    - Complexity Analysis
+   - [Jacobian](#jacobian)
 - **[Lecture 13](#lecture-13)**
+   - Using Vandermonde Matrices for Interpolation
 - **[Lecture 16](#lecture-16)**
-   - Polynomial Interpolation
+   - [Polynomial Interpolation](#polynomial-interpolation)
+   - [Taylor Polynomials](#taylor-polynomial)
 - **[Lecture 18](#lecture-18)**
 - **[Lecture 19](#lecture-19)**
 
@@ -33,7 +36,7 @@
 ### [Bisection](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/bisection_code.py)
 #### Pseudocode - Page 33
 #### Remarks
-- Upper bound for eror: $x^{(k)} −x^∗| ≤ \epsilon^{(k)} = |b^{(k)} −a^{(k)}|$
+- Upper bound for error: $|x^{(k)} −x^∗| ≤ \epsilon^{(k)} = |b^{(k)} −a^{(k)}|$
 - Error on kth iteration: $\epsilon^{(k)} = \frac{\epsilon^{(0)}}{2^k}$
 - Linear Convergence.
 - Straight line on a semilog plot
@@ -195,13 +198,18 @@ A simple re-ordering can reduce the complexity drastically!
 - Complexity analysis possible for memory/storage, etc.
 - Complexity analysis of recursively defined functions yields recurrence relations to solve
 
+### [Jacobian](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/Jacobian.py)
+![Jacobian Matrix Image](https://user-images.githubusercontent.com/114615781/231259487-6f7b05b9-656b-4d15-84b0-2c5bda390832.png)
+
+Where $\frac{\partial f_1}{\partial x_1}$ is the derivative of $f_1$ relative to $x_1$
 
 ## Lecture [13](https://learn.ontariotechu.ca/courses/21707/files/2931521?module_item_id=511258)
+This lecture talks about and introduces Interpolation. Interpolation is basically trying to find a line of best fit given a set of datapoints.
 ### Remarks
-- $\tilde{f}$ us called an interpolating function or interpolant
-- $x_k$ are interpolatng points or nodes or abscissa
+- $\tilde{f}$ is called an *interpolating function* or *interpolant*
+- $x_k$ are *interpolating points* or *nodes* or *abscissa*
 - $\tilde{f}$ provides value for points in between the nodes $x_k$
-- Desirable to have smooth $\tilde{f}$, differentiable, easy to compute
+- Desirable to have a smooth $\tilde{f}$, differentiable, easy to compute
 
 ### Notes
 - There are a few types of interpolating functions:
@@ -209,25 +217,43 @@ A simple re-ordering can reduce the complexity drastically!
    - Polynomial
    - Trignometric
    - Rational
+- Linear interpolation can be done with *scipy's* `interp1d`
 - Polynomial interpolants - Slide 8/9
+- For more information on interpolation - Slide 14
 - Polynomial Interpolation Theorem (Existence/Uniqueness of Polynomial Interpolation): If all the interpolation nodes are distinct the interpolant exists. If we select the polynomial interpolant of the lowest possible order, it is unique.
-- Vandermonde System, in matrix form, is defined as $Va = y$ where - Slide 12
+- [Vandermonde System](https://github.com/royce-mathew/CSCI2072U-Code/blob/main/Interpolation/VanderInterpSys.py), in matrix form, is defined as $Va = y$ where - Slide 23
+- Proof of the theorem on existence and uniqueness - Slide 35
 - Polynomial coefficients are $a = V^{-1}y$ for an invertible Vandermonder matrix
+- The solution exists if (and only if) the Vandermonder matrix is invertible, in which case the polynomial coefficients are $a = V^{−1}y$
 
 ## Lecture [16](https://learn.ontariotechu.ca/courses/21707/files/2991356?module_item_id=514972)
-### Notes
-- The error of polynomial interpolation is $|E_n(x)| = |f(x) - Π_n(x)|$ where `Π` is the unique polynomial interpolation of degree at most n.
-- The upper bound (maximum error) of polynomial interpolation error - Slide 5 to 8
-- Conclusions we can draw from the error formula:
+
+### Polynomial Interpolation
+Error: $|E_n(x)| = |f(x) - Π_n(x)|$ where `Π` is the unique polynomial interpolation of degree at most n
+
+Upper Bound (Maximum Error): (Slide 9) $$|E_n(x)| := |f(x) - Π_n(x)| <= max_{e \in I} \frac{|f^{(n+1)}(x)|}{(n+1)!} \Pi_{k=0}^n|x-x_k|$$
+Some conclusions we can draw from the error formula:
    - Functions with small higher derivates are well-approximated by interpolating polynomials (such functions are smooth).
    - We can choose the location of the interpolating nodes to minimize the error. Equidistant nodes are bad but nodes near the boundaries are good.
    - Extrapolation is far more dangerous than interpolation. Upper bound for the error of extrapolation grows without bound.
-- With a ***Newton Polynomial Basis***, the resulting system of linear equations for the coefficients is $Ma=y$ where $M$ is now triangular and depends on the interpolation points of $x_k$ - Slide 12/13
-- Computational Complexity:
-   - **Monomial Basis**: cost of building matrix is $O(n^2)$, cost of solving the system is $O(n^2)$
-   - **Newton Polynomial Basis**: cost of building matrix; takes fewer but is still $O(n^2)$, cost of solving triangular system is $O(n^2)$; since it only requires forward substitution.
-- Condition Number: The condition number of triangular matrix resulting from Newton Polynomial Basis is mich smaller than Vandermonde matrix, meaning Newton Polynomial Basis leads to more accurate results.
-- Taylor's Theorem - Slide 15/21
+
+With a ***Newton Polynomial Basis***, the resulting system of linear equations for the coefficients is $Ma=y$ where $M$ is now triangular and depends on the interpolation points of $x_k$ - Slide 12/13
+
+#### Computational Complexity
+- **Monomial Basis**: cost of building matrix is $O(n^2)$, cost of solving the system is $O(n^2)$
+- **Newton Polynomial Basis**: cost of building matrix; takes fewer but is still $O(n^2)$, cost of solving triangular system is $O(n^2)$; since it only requires forward substitution.
+
+#### Condition Number
+The condition number of triangular matrix resulting from Newton Polynomial Basis is mich smaller than Vandermonde matrix, meaning Newton Polynomial Basis leads to more accurate results.
+
+### Taylor Polynomial
+Slide 28
+#### Notes
+- The Taylor polynomial exists is f is sufficiently smooth.
+- We have an expression for the remainder.
+- The computation of Taylor polynomials requires the computation of derivatives. **Not many functions have such simple derivatives as in our examples!**
+- Properties of f at x = c completely determine Tn(x), so all information comes from x = c. The Taylor polynomial is useful as a local approximation only
+- For $|x − c|$ large, many terms needed for convergence. In contrast, polynomial interpolation is useful on a whole domain.
 
 
 ## Lecture [18](https://learn.ontariotechu.ca/courses/21707/files/2997531?module_item_id=515442)
