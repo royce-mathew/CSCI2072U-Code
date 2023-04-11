@@ -80,6 +80,8 @@ Id=np.identity(4)
 
 #  the zero matrix
 Zmat=np.zeros((3,3))
+# use zeros_like if you want to preserve the shape of another matrix
+mat_like_Zmat = np.zeroes_like(Zmat)
 
 print('the 4x4 identity matrix')
 print(Id)
@@ -107,5 +109,19 @@ print('x=')
 print(xx)
 print('\n')
 
-
+# solve triangular example (another way of doing LUPsolve)
+    
+P_transpose, L, U = numpy.linalg.lu(A)
+P = P_transpose.T
+y = ln.solve_triangular(L,P @ b,lower=True) # forward sub with Pb product Ly = Pb
+x = ln.solve_triangular(U,y,lower=False) # back sub
+    
+# Vandermonde example
+xs = np.linspace(-1, 1, N + 1)
+V = np.vander(xs)
+c = V[:, N - 1]
+# x, L, U, P = LUPsolve(V, c) # need the function LUPsolve to solve for x in a vandermonde
+    
+# taking a norm example
+c_norm = np.linalg.norm(c, ord=2) # ord=np.inf is max norm, default is 2
 
