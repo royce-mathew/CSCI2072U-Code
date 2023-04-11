@@ -1,8 +1,5 @@
 # 2072U - Course Code
-Contributors:
-   @Sid-26
-   @AviShangari
-   @glewis373
+Contributors: @Sid-26 @AviShangari @glewis373
    
 ## [Lecture Slides Combined](./AllSlides.pdf)
 Credit to FlamingNinja925. Download the slides instead of trying to preview in github because it won't let you `Ctrl+F` the slides on here.<br/>
@@ -43,7 +40,13 @@ All the slide numbers listed here are in Canvas format. They are **not** accordi
 - **[Lecture 19](#lecture-19)**
    - Least Squares Approximation
 - **[Lecture 20](#lecture-20)** 
-
+- **[Lecture 21](#lecture-21)** 
+   - [Quadrature](#quadrature)
+   - Midpoint, Trapezoidal, Simpson Formulas / Composite versions
+- **[Lecture 22](#lecture-22)** 
+   - Differential Equation
+   - Boundary Value Problem
+   - Approximating Solutions to Boundary Value Problems
    
 # Lectures
 ## Lecture [2](https://learn.ontariotechu.ca/courses/21707/files/2796036?module_item_id=499488)
@@ -336,3 +339,38 @@ There are composite Variations of these formulas are that the composite divides 
 ### Errors
 ![image](https://user-images.githubusercontent.com/114615781/231278698-6b84850c-5ce9-4ef2-ba05-f5d46b1a96b6.png)
 ![image](https://user-images.githubusercontent.com/114615781/231278732-378feaa4-3c16-48b4-a0a4-def058eb27e4.png)
+
+
+## Lecture [22](https://learn.ontariotechu.ca/courses/21707/files/3081454?module_item_id=519413)
+```python3
+N = 4 # number of interior grid points
+h = 1.0/(1.0+N) # step size
+
+xs = np.linspace(0,1,N+2) # discretized grid
+
+def f(x):
+   return x*np.exp(-2.0*x) # right-hand side function
+
+alpha = -1.0/4.0; beta = 0.0 # boundary values
+
+def U(x):
+   return -np.exp(-2.0*x)/4.0 - x * np.exp(-2.0*x)/4.0 + np.exp(-2.0)*x/2.0 # exact solution
+
+# construct tridiagonal matrix A
+A = scipy.sparse.diags([[1]*(N-1),[-2]*N,[1]*(N-1)],[-1,0,1])
+
+# construct right-hand side vector b
+b = h**2 * f(xs[1:N+1]) # interior grid points
+b[0] = b[0] + alpha; b[N-1] = b[N-1] + beta # boundary values
+
+# solve linear system using sparse matrix methods
+u_i = scipy.sparse.linalg.spsolve(-A,b) # interior grid points
+u = scipy.append([alpha],u_i); # add boundary value to beginning
+u = scipy.append(u,[beta]) # add boundary value to end
+```
+### Remarks
+- Finite-difference methods extend to partial derivatives, PDEs.
+- Linear DE $\rightarrow$ Linear Algebraic equations for $\overrightarrow{U}_h$
+- NonLinear DE $\rightarrow$ Nonlinear equations for $\overrightarrow{U}_h$
+- Accuracy of finite-difference formulas relates to accuracy of computed solutions.
+- Finer grids/meshes $\rightarrow$ more accurate solutions, but larger matrices (although the matrices are sparse!).
