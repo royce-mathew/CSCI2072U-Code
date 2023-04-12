@@ -104,6 +104,8 @@ Secant methods needs two initial guesses: $x_{(0)}$ and $x_{(1)}$
 - If we can find an $a$ and $b$ such that $x^∗ \in [a, b]$, then $x_0 = a$ and $x_1 = b$ is a good starting point.
 - Error Estimate: $\epsilon^{(k+1)} \approx (\epsilon^{(k)})^2$
 
+![image](https://user-images.githubusercontent.com/114615781/231320324-db6d3772-4e5a-4382-87ce-b594f8d5e3d1.png)
+
 
 ## Lecture [5](https://learn.ontariotechu.ca/courses/21707/files/2839238?module_item_id=504808)
 ### Notes
