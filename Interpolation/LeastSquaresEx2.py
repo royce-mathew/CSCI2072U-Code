@@ -45,7 +45,7 @@ b = A.T @ yd
 
 #  solve for least-squares approximation 
 xstar = scipy.linalg.solve(M,b)
-
+print(xstar)
 
 #  or get least-squares solution directly from A and yd using scipy
 #xstar,res, rnk,s = scipy.linalg.lstsq(A,yd)
@@ -68,3 +68,4 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.title('Least-Squares Fit to Noisy Data')
 plt.legend(['data','least-squares','f(x)'],loc='upper left')
+plt.show()

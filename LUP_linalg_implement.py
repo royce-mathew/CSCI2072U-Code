@@ -7,8 +7,10 @@
 import scipy.linalg
 import numpy as np
 
-A = np.array([[0.2,1.4,-0.4,12.3],[-2.3,4.2,1.1,-0.9],[9.2,-2.3,-0.1,2.2],[3.4,3.3,-10.1,4.0]])
-b = np.array([[0.2],[-1.2],[3.3],[0.2]])
+A = np.array([[1.8, 2.1, 0.9],
+              [2.4, -3.2, -1.3],
+              [1.4, -1.1, 0.5]])
+# b = np.array([[0.2],[-1.2],[3.3],[0.2]])
 
 #  linalg.lu finds Pt, L and U such that A = Pt L U
 #  (Pt is inverse of what we did in class; but for
@@ -16,9 +18,9 @@ b = np.array([[0.2],[-1.2],[3.3],[0.2]])
 
 Pt,L,U = scipy.linalg.lu(A)
 P = Pt.T
-Pb = np.matmul(P,b)
-y = scipy.linalg.solve_triangular(L,Pb,lower=True)
-x = scipy.linalg.solve_triangular(U,y,lower=False)
+# Pb = np.matmul(P,b)
+# y = scipy.linalg.solve_triangular(L,Pb,lower=True)
+# x = scipy.linalg.solve_triangular(U,y,lower=False)
 
 print('Matrix A is\n')
 print(A)
@@ -37,11 +39,11 @@ print(Pt.T)
 print('\n')
 
 print('The solution of A x = b is x=')
-print(x)
+# print(x)
 print('\n')
 
 print('Residual vector is')
-print(np.matmul(A,x)-b)
+# print(np.matmul(A,x)-b)
 print('\n')
 
 #  Pt L U = A
